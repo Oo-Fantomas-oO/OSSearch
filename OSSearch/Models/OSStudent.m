@@ -39,12 +39,29 @@ static NSString* lastNames[] = {
 
 static int namesCount = 50;
 
-+(OSStudent *) randomStudent {
++(OSStudent *) createRandomStudent {
     
     OSStudent *student = [OSStudent new];
-    
     student.firstName = firstNames[arc4random_uniform(namesCount)];
     student.lastName = lastNames[arc4random_uniform(namesCount)];
+    
+    NSDate *currentDate = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd.MM.yyyy"];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear fromDate:currentDate];
+    NSInteger yearCurrent = [components year];
+    
+    NSInteger birthDateYear = yearCurrent - (arc4random_uniform(100));
+    NSInteger birthDateDay = arc4random_uniform(31);
+    NSInteger birthDateMonth = arc4random_uniform(12);
+    
+    [components setDay:birthDateDay];
+    [components setMonth:birthDateMonth];
+    [components setYear:birthDateYear];
+    
+    student.birthDate = [calendar dateFromComponents:components];
+    student.birthDateMonth = birthDateMonth;
     
     return student;
 }

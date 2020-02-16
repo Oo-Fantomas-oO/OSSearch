@@ -10,7 +10,10 @@
 #import "OSStudent.h"
 
 @interface ViewController ()
-
+//typedef NS_ENUM(NSUInteger, GenderMode){
+//    numOne,
+//    numTwo
+//};
 @property (strong, nonatomic) NSMutableArray *studentsArray;
 @property (strong, nonatomic) OSStudent *student;
 
@@ -24,14 +27,14 @@
     self.studentsArray = [NSMutableArray array];
     
     for (int i = 0; i < 1000; i++) {
-        [self.studentsArray addObject:[OSStudent randomStudent]];
+        [self.studentsArray addObject:[OSStudent createRandomStudent]];
     }
     
     [self.tableView reloadData];
     
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - UITableViewDataSource -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -48,13 +51,30 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", self.student.firstName, self.student.lastName];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd.MM.yyyy"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.student.birthDate]];
+   // NSLog(@"%@", [dateFormatter stringFromDate:self.student.birthDate]);
     
     return cell;
     
+}
+
+#pragma mark - UISearchBarDelegate -
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
 }
 
 @end

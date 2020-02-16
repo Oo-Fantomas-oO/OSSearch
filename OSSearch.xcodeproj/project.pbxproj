@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B826327223F9CF430096E955 /* OSSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B826327123F9CF430096E955 /* OSSection.m */; };
 		B834657023F1FFA40011FB87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B834656F23F1FFA40011FB87 /* AppDelegate.m */; };
 		B834657323F1FFA40011FB87 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B834657223F1FFA40011FB87 /* SceneDelegate.m */; };
 		B834657623F1FFA40011FB87 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B834657523F1FFA40011FB87 /* ViewController.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B826327023F9CF430096E955 /* OSSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSSection.h; sourceTree = "<group>"; };
+		B826327123F9CF430096E955 /* OSSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSSection.m; sourceTree = "<group>"; };
 		B834656B23F1FFA40011FB87 /* OSSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B834656E23F1FFA40011FB87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B834656F23F1FFA40011FB87 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -85,6 +88,8 @@
 			children = (
 				B834658723F202A60011FB87 /* OSStudent.h */,
 				B834658823F202A60011FB87 /* OSStudent.m */,
+				B826327023F9CF430096E955 /* OSSection.h */,
+				B826327123F9CF430096E955 /* OSSection.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				B834657623F1FFA40011FB87 /* ViewController.m in Sources */,
 				B834658923F202A60011FB87 /* OSStudent.m in Sources */,
 				B834657023F1FFA40011FB87 /* AppDelegate.m in Sources */,
+				B826327223F9CF430096E955 /* OSSection.m in Sources */,
 				B834658123F1FFA60011FB87 /* main.m in Sources */,
 				B834657323F1FFA40011FB87 /* SceneDelegate.m in Sources */,
 			);
