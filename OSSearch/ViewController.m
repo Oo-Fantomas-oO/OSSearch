@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSMutableArray *studentsArray;
 @property (strong, nonatomic) OSStudent *student;
 
+@property (strong, nonatomic) NSOperation *currentOperation;
+
 @end
 
 @implementation ViewController
@@ -26,12 +28,36 @@
     
     self.studentsArray = [NSMutableArray array];
     
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 100; i++) {
         [self.studentsArray addObject:[OSStudent createRandomStudent]];
     }
     
+    [self generateSectionsInBackgroundFromArray:self.studentsArray];
+    
     [self.tableView reloadData];
     
+}
+
+#pragma mark - Private methods -
+- (void)generateSectionsInBackgroundFromArray:(NSArray *)array
+{
+    [self.currentOperation cancel];
+    __weak ViewController *weakSelf = self;
+    
+    self.currentOperation = [NSBlockOperation blockOperationWithBlock:^{
+        
+        NSArray *sectionsArray = [weakSelf generateSectionsFromArray:array];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            weakSelf.sectionsArray = sectionsArray;
+            [weakSelf.tableView reloadData];
+            self.currentOperation = nil;
+        
+        });
+    }];
+    
+    [self.currentOperation start];
 }
 
 #pragma mark - UITableViewDataSource -
@@ -39,7 +65,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [self.studentsArray count];
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,10 +84,8 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd.MM.yyyy"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.student.birthDate]];
-   // NSLog(@"%@", [dateFormatter stringFromDate:self.student.birthDate]);
     
     return cell;
-    
 }
 
 #pragma mark - UISearchBarDelegate -
